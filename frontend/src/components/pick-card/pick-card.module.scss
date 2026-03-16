@@ -1,0 +1,74 @@
+.fix_container {
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    aspect-ratio: 3.5 / 5;
+    margin: 0 auto;
+    touch-action: none;
+}
+
+.card_inner {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+    border-radius: 20px;
+    background-color: #fff;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.97);
+    transition:
+        box-shadow 0.3s,
+        transform 0.3s;
+}
+
+.card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &.active {
+        top: 0;
+        transform-origin: center bottom;
+
+        .card_inner {
+            transform: translateY(0px) scale(1.0);
+        }
+
+        &.top {
+            pointer-events: auto;
+        }
+    }
+
+    &.evaluating {
+        opacity: 0;
+        pointer-events: none;
+        transition:
+            opacity 0.3s,
+            transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    &.evaluating_good {
+        transform: translateX(110%) rotate(25deg);
+    }
+
+    &.evaluating_bad {
+        transform: translateX(-110%) rotate(-25deg);
+    }
+}
+
+@media screen and (max-height: 700px) {
+    .container {
+        max-height: 85vh;
+    }
+}
